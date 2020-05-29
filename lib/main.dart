@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_only_example/locator.dart';
 import 'package:get_only_example/ui/router.dart';
 
 void main() {
-  setupLocator();
+  // setupLocator();
   runApp(MyApp());
 }
 
