@@ -14,7 +14,7 @@ class LikeButton extends StatelessWidget {
     return BaseView<LikeButtonModel>(
       builder: (model) => Row(
             children: <Widget>[
-              Text('Likes ${model.postLikes(postId)}'),
+              Text('Likes ${model.postLikes(postId)} '),
               MaterialButton(
                 color: Colors.white,
                 child: Icon(Icons.thumb_up),
