@@ -15,6 +15,6 @@ class LikeButtonModel extends BaseModel {
 
   void increaseLikes(int postId) {
     _postsService.incrementLikes(postId);
-    update(this);
+    update();
   }
 }

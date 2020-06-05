@@ -8,6 +8,6 @@ class BaseModel extends GetController {
 
   void setViewState(ViewState viewState) {
     _state = viewState;
-    update(this);
+    update();
   }
 }
