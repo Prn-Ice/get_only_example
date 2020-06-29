@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_only_example/core/enums/viewstate.dart';
 import 'package:get_only_example/core/models/post.dart';
 import 'package:get_only_example/core/viewmodels/home_model.dart';
 import 'package:get_only_example/ui/router.dart';
@@ -9,15 +8,13 @@ import 'package:get_only_example/ui/shared/text_styles.dart';
 import 'package:get_only_example/ui/shared/ui_helpers.dart';
 import 'package:get_only_example/ui/widgets/postlist_item.dart';
 
-import 'base_view.dart';
-
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseView<HomeModel>(
+    return GetBuilder<HomeModel>(
       builder: (model) => Scaffold(
         backgroundColor: backgroundColor,
-        body: model.state == ViewState.Busy
+        body: model.isBusy
             ? Center(child: CircularProgressIndicator())
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

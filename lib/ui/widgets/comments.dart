@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:get_only_example/core/enums/viewstate.dart';
+import 'package:get/get.dart';
 import 'package:get_only_example/core/models/comment.dart';
 import 'package:get_only_example/core/viewmodels/comments_model.dart';
 import 'package:get_only_example/ui/shared/app_colors.dart';
 import 'package:get_only_example/ui/shared/ui_helpers.dart';
-import 'package:get_only_example/ui/views/base_view.dart';
 
 class Comments extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BaseView<CommentsModel>(
-      builder: (model) => model.state == ViewState.Busy
-          ? Center(child: CircularProgressIndicator())
-          : Expanded(
-              child: ListView(
-                children: model.comments
-                    .map((comment) => CommentItem(comment))
-                    .toList(),
-              ),
-            ),
+    return GetBuilder<CommentsModel>(
+      init: CommentsModel(),
+      builder: (model) {
+        print(model.isBusy);
+        return model.isBusy
+            ? Center(child: CircularProgressIndicator())
+            : Expanded(
+                child: ListView(
+                  children: model.comments
+                          ?.map((comment) => CommentItem(comment))
+                          ?.toList() ??
+                      [Text('no data')],
+                ),
+              );
+      },
     );
   }
 }

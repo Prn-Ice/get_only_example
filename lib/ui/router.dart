@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_only_example/core/bindings/home_bindings.dart';
 import 'package:get_only_example/core/bindings/login_bindings.dart';
@@ -12,11 +11,20 @@ class Router {
   static const String loginViewRoute = '/';
   static const String postViewRoute = '/post';
 
-  static Map<String, GetRoute> namedRoutes = <String, GetRoute>{
-    homeViewRoute: GetRoute(page: HomeView(), binding: HomeBindings()),
-    loginViewRoute: GetRoute(page: LoginView(), binding: LoginBindings()),
-    postViewRoute: GetRoute(page: PostView(), binding: PostBindings()),
-  };
+  static List<GetPage> namedRoutes = <GetPage>[
+    GetPage(
+        name: homeViewRoute, page: () => HomeView(), binding: HomeBindings()),
+    GetPage(
+        name: loginViewRoute,
+        page: () => LoginView(),
+        binding: LoginBindings()),
+    GetPage(
+        name: postViewRoute, page: () => PostView(), binding: PostBindings()),
+  ];
+
+  /*static Route<dynamic> onUnknownRoute(RouteSettings settings){
+    return GetRouteBase(page: null)
+  }
 
   static const GetRoute errorRoute = GetRoute(
     page: Scaffold(
@@ -24,5 +32,5 @@ class Router {
         child: Text('No route defined for selected route'),
       ),
     ),
-  );
+  );*/
 }

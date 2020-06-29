@@ -1,13 +1,11 @@
 import 'package:get/get.dart';
-import 'package:get_only_example/core/enums/viewstate.dart';
 import 'package:get_only_example/core/models/post.dart';
 import 'package:get_only_example/core/models/user.dart';
 import 'package:get_only_example/core/services/authentication_service.dart';
 import 'package:get_only_example/core/services/posts_service.dart';
+import 'package:get_only_example/core/viewmodels/base_view_model.dart';
 
-import 'base_model.dart';
-
-class HomeModel extends BaseModel {
+class HomeModel extends BaseViewModel {
   PostsService _postsService = Get.find<PostsService>();
 
   @override
@@ -21,8 +19,6 @@ class HomeModel extends BaseModel {
   User get user => Get.find<AuthenticationService>().userController.value;
 
   Future getPosts(int userId) async {
-    setViewState(ViewState.Busy);
-    await _postsService.getPostsForUser(userId);
-    setViewState(ViewState.Idle);
+    await runBusyFuture(_postsService.getPostsForUser(userId));
   }
 }

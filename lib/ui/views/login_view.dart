@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_only_example/core/enums/viewstate.dart';
 import 'package:get_only_example/core/viewmodels/login_model.dart';
 import 'package:get_only_example/ui/router.dart';
 import 'package:get_only_example/ui/shared/app_colors.dart';
 import 'package:get_only_example/ui/widgets/login_header.dart';
-
-import 'base_view.dart';
 
 class LoginView extends StatefulWidget {
   @override
@@ -18,7 +15,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return BaseView<LoginModel>(
+    return GetBuilder<LoginModel>(
       builder: (model) => Scaffold(
         backgroundColor: backgroundColor,
         body: Column(
@@ -26,7 +23,7 @@ class _LoginViewState extends State<LoginView> {
           children: <Widget>[
             LoginHeader(
                 validationMessage: model.errorMessage, controller: _controller),
-            model.state == ViewState.Busy
+            model.isBusy
                 ? CircularProgressIndicator()
                 : FlatButton(
                     color: Colors.white,

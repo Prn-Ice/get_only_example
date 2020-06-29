@@ -13,8 +13,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(),
-      namedRoutes: Router.namedRoutes,
-      unknownRoute: Router.errorRoute,
+      getPages: Router.namedRoutes,
+      /*onUnknownRoute: ,
+      unknownRoute: Router.errorRoute,*/
     );
   }
 }

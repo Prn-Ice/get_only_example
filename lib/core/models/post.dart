@@ -5,7 +5,7 @@ class Post {
   int id;
   String title;
   String body;
-  IntX likes;
+  RxInt likes;
 
   Post({this.userId, this.id, this.title, this.body}) : likes = 0.obs;
 
