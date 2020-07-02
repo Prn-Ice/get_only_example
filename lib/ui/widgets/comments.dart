@@ -11,7 +11,6 @@ class Comments extends StatelessWidget {
     return GetBuilder<CommentsModel>(
       init: CommentsModel(),
       builder: (model) {
-        print(model.isBusy);
         return model.isBusy
             ? Center(child: CircularProgressIndicator())
             : Expanded(

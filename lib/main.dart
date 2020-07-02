@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_only_example/ui/router.dart';
+
+import 'ui/router.dart';
 
 void main() {
   // setupLocator();
@@ -14,8 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(),
       getPages: Router.namedRoutes,
-      /*onUnknownRoute: ,
-      unknownRoute: Router.errorRoute,*/
+      unknownRoute: Router.errorRoute,
     );
   }
 }
