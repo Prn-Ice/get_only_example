@@ -5,20 +5,15 @@ import 'package:get_only_example/core/services/authentication_service.dart';
 import 'package:get_only_example/core/services/posts_service.dart';
 import 'package:get_only_example/core/viewmodels/base_view_model.dart';
 
-class HomeModel extends BaseViewModel {
+class HomeModel extends FutureViewModel {
   PostsService _postsService = Get.find<PostsService>();
-
-  @override
-  void onInit() {
-    getPosts(user.id);
-    super.onInit();
-  }
 
   List<Post> get posts => _postsService.posts;
 
   User get user => Get.find<AuthenticationService>().userController.value;
 
-  Future getPosts(int userId) async {
-    await runBusyFuture(_postsService.getPostsForUser(userId));
+  @override
+  Future futureToRun() {
+    return _postsService.getPostsForUser(user.id);
   }
 }
