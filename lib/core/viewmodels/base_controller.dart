@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 /// Contains ViewModel functionality for busy state management
-class BaseViewModel extends GetxController {
+class BaseGetController extends GetxController {
   Map<int, bool> _busyStates = <int, bool>{};
 
   bool _disposed = false;
@@ -109,7 +109,7 @@ class BaseViewModel extends GetxController {
 
 @protected
 // ignore: public_member_api_docs
-class DynamicSourceViewModel<T> extends BaseViewModel {
+class DynamicSourceGetController<T> extends BaseGetController {
   // ignore: public_member_api_docs
   bool changeSource = false;
   // ignore: public_member_api_docs
@@ -118,7 +118,7 @@ class DynamicSourceViewModel<T> extends BaseViewModel {
   }
 }
 
-class _SingleDataSourceViewModel<T> extends DynamicSourceViewModel {
+class _SingleDataSourceGetController<T> extends DynamicSourceGetController {
   T _data;
   T get data => _data;
 
@@ -131,7 +131,7 @@ class _SingleDataSourceViewModel<T> extends DynamicSourceViewModel {
   bool get dataReady => _data != null && !_hasError;
 }
 
-class _MultiDataSourceViewModel extends DynamicSourceViewModel {
+class _MultiDataSourceGetController extends DynamicSourceGetController {
   Map<String, dynamic> _dataMap;
   Map<String, dynamic> get dataMap => _dataMap;
 
@@ -147,7 +147,8 @@ class _MultiDataSourceViewModel extends DynamicSourceViewModel {
 
 /// Provides functionality for a ViewModel that's sole purpose it is to fetch
 /// data using a [Future]
-abstract class FutureViewModel<T> extends _SingleDataSourceViewModel<T> {
+abstract class FutureGetController<T>
+    extends _SingleDataSourceGetController<T> {
   /// The future that fetches the data and sets the view to busy
   @Deprecated('Use the futureToRun function')
   Future<T> get future => null;
@@ -185,7 +186,6 @@ abstract class FutureViewModel<T> extends _SingleDataSourceViewModel<T> {
   }
 
   /// Called when an error occurs within the future being run
-  // ignore: type_annotate_public_apis
   void onError(error) {}
 
   /// Called after the data has been set
@@ -200,7 +200,8 @@ abstract class FutureViewModel<T> extends _SingleDataSourceViewModel<T> {
 
 /// Provides functionality for a ViewModel to run and fetch data using multiple
 /// future
-abstract class MultipleFutureViewModel extends _MultiDataSourceViewModel {
+abstract class MultipleFutureGetController
+    extends _MultiDataSourceGetController {
   // ignore: public_member_api_docs
   Map<String, Future Function()> get futuresMap;
 
@@ -276,7 +277,8 @@ abstract class MultipleFutureViewModel extends _MultiDataSourceViewModel {
 
 /// Provides functionality for a ViewModel to run and fetch data
 /// using multiple streams
-abstract class MultipleStreamViewModel extends _MultiDataSourceViewModel {
+abstract class MultipleStreamGetController
+    extends _MultiDataSourceGetController {
   // Every MultipleStreamViewModel must override streamDataMap
   // StreamData requires a stream, but lifecycle events are optional
   // if a lifecyle event isn't defined we use the default ones here
@@ -397,8 +399,8 @@ abstract class MultipleStreamViewModel extends _MultiDataSourceViewModel {
 }
 
 // ignore: public_member_api_docs
-abstract class StreamViewModel<T> extends _SingleDataSourceViewModel<T>
-    implements DynamicSourceViewModel {
+abstract class StreamGetController<T> extends _SingleDataSourceGetController<T>
+    implements DynamicSourceGetController {
   /// Stream to listen to
   Stream<T> get stream;
 
@@ -486,7 +488,7 @@ abstract class StreamViewModel<T> extends _SingleDataSourceViewModel<T>
 }
 
 // ignore: public_member_api_docs
-class StreamData<T> extends _SingleDataSourceViewModel<T> {
+class StreamData<T> extends _SingleDataSourceGetController<T> {
   // ignore: public_member_api_docs
   Stream<T> stream;
 
@@ -563,7 +565,7 @@ class StreamData<T> extends _SingleDataSourceViewModel<T> {
 }
 
 /*
-/// Interface: Additional actions that should be implemented by spcialised
+/// Interface: Additional actions that should be implemented by specialised
 /// ViewModels
 // ignore: one_member_abstracts
 abstract class Initialisable {

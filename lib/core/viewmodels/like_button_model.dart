@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get_only_example/core/services/posts_service.dart';
-import 'package:get_only_example/core/viewmodels/base_view_model.dart';
+import 'package:get_only_example/core/viewmodels/base_controller.dart';
 
-class LikeButtonModel extends BaseViewModel {
+class LikeButtonModel extends BaseGetController {
   PostsService _postsService = Get.find<PostsService>();
 
   int postLikes(int postId) {

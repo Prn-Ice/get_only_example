@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get_only_example/core/services/authentication_service.dart';
-import 'package:get_only_example/core/viewmodels/base_view_model.dart';
+import 'package:get_only_example/core/viewmodels/base_controller.dart';
 
-class LoginModel extends BaseViewModel {
+class LoginModel extends BaseGetController {
   final AuthenticationService _authenticationService =
       Get.find<AuthenticationService>();
 

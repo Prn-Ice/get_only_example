@@ -2,9 +2,9 @@ import 'package:get/get.dart';
 import 'package:get_only_example/core/models/comment.dart';
 import 'package:get_only_example/core/models/post.dart';
 import 'package:get_only_example/core/services/api.dart';
-import 'package:get_only_example/core/viewmodels/base_view_model.dart';
+import 'package:get_only_example/core/viewmodels/base_controller.dart';
 
-class CommentsModel extends FutureViewModel {
+class CommentsModel extends FutureGetController {
   List<Comment> comments;
 
   Api _api = Get.find<Api>();

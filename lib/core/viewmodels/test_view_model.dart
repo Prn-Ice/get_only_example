@@ -1,6 +1,6 @@
-import 'package:get_only_example/core/viewmodels/base_view_model.dart';
+import 'package:get_only_example/core/viewmodels/base_controller.dart';
 
-class TestViewModel extends FutureViewModel {
+class TestViewModel extends FutureGetController {
   @override
   Future futureToRun() {
     return _fakeFetch();
